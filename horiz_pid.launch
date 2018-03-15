@@ -1,0 +1,12 @@
+  <launch>
+  <node name="drone_horizontal_pid" pkg="pid" type="controller" >
+      <param name="Kp" value=".005" />
+      <param name="Ki" value="0.0" />
+      <param name="Kd" value="0.0" />
+      <param name="upper_limit" value="1" />
+      <param name="lower_limit" value="-1" />
+      <param name="windup_limit" value="1" />
+      <param name="max_loop_frequency" value="100.0" />
+      <param name="min_loop_frequency" value="100.0" />
+    </node>
+  </launch>
