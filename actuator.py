@@ -36,9 +36,10 @@ def setCommand(x, y, z, ang_x, ang_y, ang_z):
 
 def callback(ydata):
 	global times;
-	if (times > 300):
-		ycomm = ydata.data * -1;
-		setCommand(ydata.data,0,0,0,0,0);  ## Just adjust drone y-position for now.
+	global yset;
+	if (times > 50):
+		yset = ydata.data;
+		#setCommand(0,ycomm,0,0,0,0);  ## Just adjust drone y-position for now.
 
 if __name__ == '__main__':
 	takeoff_pub = rospy.Publisher("ardrone/takeoff", Empty, queue_size = 10)  ## Declare all publishers.
@@ -48,17 +49,20 @@ if __name__ == '__main__':
 	##mag_sub = rospy.Subscriber("dir_mag", numpy_msg(Floats), callback, queue_size = 10)
     
 	## Subscribe to control_effort topic from pid node, to give right values to setCommand.
-	control_sub = rospy.Subscriber("control_effort", Float64, callback, queue_size=10)	
+	control_sub = rospy.Subscriber("control_effort", Float64, callback, queue_size=1)	
 
 	start = time.time();
 	times = 0;
+	yset = 0;
 	while (not rospy.is_shutdown()):
-		if (times < 1200):
+		if (times < 30):
 			takeoff();
+			times += 1;
+		elif (times < 1500):
+			setCommand(0,yset,0,1,1,0);
 			times += 1;
 		else:
 			land();
-		#if (times < 30):
 		 	##setCommand(0,0,0,0,0,0);
 		
 		#print(times);
