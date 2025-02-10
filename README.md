@@ -3,6 +3,7 @@ A ROS package intended for quadcopter facial tracking, using a Parrot Drone 2.0.
 
 Currently, the drone only follows horizontal movements, for simplicity, which are smoothened using the ROS pid node, with only a proportional term for now. This node can be installed with the following command:
 
+'''bash
 sudo apt-get install ros-kinetic-pid   (replace 'kinetic' with corresponding ROS release)
 
 Optimal PID terms will be added soon, as well as support for vertical tracking movements.
