@@ -5,5 +5,6 @@ Currently, the drone only follows horizontal movements, for simplicity, which ar
 
 ```bash
 sudo apt-get install ros-kinetic-pid   (replace 'kinetic' with corresponding ROS release)
+```
 
 Optimal PID terms will be added soon, as well as support for vertical tracking movements.
